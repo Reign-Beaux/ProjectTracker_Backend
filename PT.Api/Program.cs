@@ -1,4 +1,9 @@
+using PT.Application.DependencyInjection;
+using PT.Infraestructure.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddUnitsOfWorkServices();
+builder.Services.AddBehaviorsServices(builder.Configuration);
 
 // Add services to the container.
 

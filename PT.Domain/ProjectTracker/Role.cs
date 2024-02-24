@@ -1,6 +1,6 @@
 ﻿namespace PT.Domain.ProjectTracker
 {
-    public class Roles
+    public class Role
     {
         public int Id { get; set; }
         public string? Code { get; set; }

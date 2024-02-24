@@ -5,7 +5,7 @@ namespace PT.Infraestructure.DependencyInjection
 {
     public static class InjectionUnitsOfWork
     {
-        public static IServiceCollection AddInjectionUnitsOfWork(this IServiceCollection services)
+        public static IServiceCollection AddUnitsOfWorkServices(this IServiceCollection services)
         {
             services.AddTransient<IUnitOfWorkProjectTracker, UnitOfWorkProjectTracker>();
 
