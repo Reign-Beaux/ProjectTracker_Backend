@@ -13,7 +13,8 @@
   <ItemGroup>
     <Folder Include="DependencyInjection\" />
     <Folder Include="Persistence\ProjectTrackerTools\" />
-    <Folder Include="Persistence\ProjectTracker\" />
+    <Folder Include="Persistence\ProjectTracker\Features\" />
+    <Folder Include="Persistence\ProjectTracker\Users\" />
   </ItemGroup>
 
   <ItemGroup>
