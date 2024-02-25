@@ -28,10 +28,10 @@ namespace PT.Infraestructure.Persistence.Common
             return await _dbConnection.QuerySingleOrDefaultAsync<T>(spString, new { Id = id }, transaction: _dbTransaction);
         }
 
-        public async Task Insert<T>(T payload)
+        public async Task Insert<T, U>(U payload)
         {
             var entity = typeof(T);
-            var spString = $"[dbo].[usp_{entity}s_INS]";
+            var spString = $"[dbo].[usp_{entity.Name}s_INS]";
             await _dbConnection.ExecuteAsync(spString, payload, transaction: _dbTransaction);
         }
 

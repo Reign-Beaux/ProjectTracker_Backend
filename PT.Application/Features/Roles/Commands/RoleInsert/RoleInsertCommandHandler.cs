@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWorkProjectTracker;
 
 namespace PT.Application.Features.Roles.Commands.RoleInsert
@@ -16,7 +17,8 @@ namespace PT.Application.Features.Roles.Commands.RoleInsert
         {
             try
             {
-                await _projectTracker.RolesRepository.Insert(request);
+                await _projectTracker.RolesRepository.Insert<Role, RoleInsertCommand>(request);
+                _projectTracker.Commit();
             }
             catch(Exception ex)
             {

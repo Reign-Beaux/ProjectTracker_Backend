@@ -1,9 +1,10 @@
 ﻿using MediatR;
-using PT.Domain.ProjectTracker;
 
 namespace PT.Application.Features.Roles.Commands.RoleInsert
 {
-    public class RoleInsertCommand : Role, IRequest
+    public class RoleInsertCommand : IRequest
     {
+        public string? Code { get; set; }
+        public string? Description { get; set; }
     }
 }
