@@ -24,11 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\RolesCrud\Queries\" />
-    <Folder Include="Features\RolesCrud\Commands\RoleDelete\" />
-    <Folder Include="Features\RolesCrud\Commands\RoleUpdate\" />
-    <Folder Include="Features\RolesCrud\Queries\RoleGetById\" />
-    <Folder Include="Features\RolesCrud\Queries\RoleGetAll\" />
+    <Folder Include="Features\Roles\Queries\" />
+    <Folder Include="Features\Roles\Commands\RoleDelete\" />
+    <Folder Include="Features\Roles\Commands\RoleUpdate\" />
+    <Folder Include="Features\Roles\Queries\RoleGetById\" />
+    <Folder Include="Features\Roles\Queries\RoleGetAll\" />
     <Folder Include="Helpers\" />
     <Folder Include="Services\" />
   </ItemGroup>

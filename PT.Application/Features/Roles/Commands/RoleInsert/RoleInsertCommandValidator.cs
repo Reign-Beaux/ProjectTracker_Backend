@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace PT.Application.Features.RolesCrud.Commands.RoleInsert
+namespace PT.Application.Features.Roles.Commands.RoleInsert
 {
     public class RoleInsertCommandValidator : AbstractValidator<RoleInsertCommand>
     {
