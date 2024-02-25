@@ -24,10 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Roles\Queries\" />
     <Folder Include="Features\Roles\Commands\RoleDelete\" />
     <Folder Include="Features\Roles\Commands\RoleUpdate\" />
-    <Folder Include="Features\Roles\Queries\RoleGetById\" />
     <Folder Include="Features\Roles\Queries\RoleGetAll\" />
     <Folder Include="Helpers\" />
     <Folder Include="Services\" />

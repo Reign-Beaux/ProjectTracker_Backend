@@ -24,7 +24,7 @@ namespace PT.Infraestructure.Persistence.Common
         public async Task<T?> GetById<T>(int id)
         {
             var entity = typeof(T);
-            var spString = $"[dbo].[usp_{entity}s_GET] @Id";
+            var spString = $"[dbo].[usp_{entity}s_GET]";
             return await _dbConnection.QuerySingleOrDefaultAsync<T>(spString, new { Id = id }, transaction: _dbTransaction);
         }
 

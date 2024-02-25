@@ -6,19 +6,17 @@ namespace PT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class RolesController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public RolesController(IMediator mediator)
+        public RolesController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Unit>> InsertRole([FromBody] RoleInsertCommand request)
+        public async Task<IActionResult> InsertRole([FromBody] RoleInsertCommand request)
         {
-            return await _mediator.Send(request);
+            var response = await _mediator.Send(request);
+            return HandleResponse(response);
         }
     }
 }
