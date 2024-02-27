@@ -25,8 +25,6 @@ namespace PT.Application.Features.Roles.Commands.RoleInsert
 
             try
             {
-                if (true)
-                    throw new Exception("Por mis huevos");
                 var tableName = EntityToTable.Convert<Role>();
                 await _projectTracker.RolesRepository.Insert(tableName, request);
                 _projectTracker.Commit();
