@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWorkProjectTracker;
+using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
+using PT.Infraestructure.Persistence.ProjectTrackerTools.UnitOfWork;
 
 namespace PT.Infraestructure.DependencyInjection
 {
@@ -8,6 +9,7 @@ namespace PT.Infraestructure.DependencyInjection
         public static IServiceCollection AddUnitsOfWorkServices(this IServiceCollection services)
         {
             services.AddTransient<IUnitOfWorkProjectTracker, UnitOfWorkProjectTracker>();
+            services.AddTransient<IUnitOfWorkProjectTrackerTools, UnitOfWorkProjectTrackerTools>();
 
             return services;
         }

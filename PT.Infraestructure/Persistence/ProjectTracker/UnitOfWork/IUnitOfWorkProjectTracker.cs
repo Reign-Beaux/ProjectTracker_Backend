@@ -1,6 +1,6 @@
 ﻿using PT.Infraestructure.Persistence.ProjectTracker.Roles;
 
-namespace PT.Infraestructure.Persistence.ProjectTracker.UnitOfWorkProjectTracker
+namespace PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork
 {
     public interface IUnitOfWorkProjectTracker
     {

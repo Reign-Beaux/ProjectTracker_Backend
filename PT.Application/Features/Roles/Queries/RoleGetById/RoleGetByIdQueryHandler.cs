@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using PT.Application.Models.Responses;
 using PT.Domain.ProjectTracker;
-using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWorkProjectTracker;
+using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
 
 namespace PT.Application.Features.Roles.Queries.RoleGetById
 {
-    public class RoleGetByIdQueryHandler : IRequestHandler<RoleGetByIdQuery, Role>
+    public class RoleGetByIdQueryHandler : IRequestHandler<RoleGetByIdQuery, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
 
@@ -13,9 +14,20 @@ namespace PT.Application.Features.Roles.Queries.RoleGetById
             _projectTracker = projectTracker;
         }
 
-        public async Task<Role> Handle(RoleGetByIdQuery request, CancellationToken cancellationToken)
+        public async Task<IResponse> Handle(RoleGetByIdQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var response = new ResponseData<Role>();
+
+            try
+            {
+                //response.Data = await _projectTracker.RolesRepository.GetById<Role>(request.Id) ?? throw new Exception("");
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            return response;
         }
     }
 }

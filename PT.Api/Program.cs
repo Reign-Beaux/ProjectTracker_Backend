@@ -2,6 +2,7 @@ using PT.Application.DependencyInjection;
 using PT.Infraestructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCustomServices();
 builder.Services.AddUnitsOfWorkServices();
 builder.Services.AddFeaturesServices();
 builder.Services.AddValidatorsServices();

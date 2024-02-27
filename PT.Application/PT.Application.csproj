@@ -28,7 +28,6 @@
     <Folder Include="Features\Roles\Commands\RoleUpdate\" />
     <Folder Include="Features\Roles\Queries\RoleGetAll\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
