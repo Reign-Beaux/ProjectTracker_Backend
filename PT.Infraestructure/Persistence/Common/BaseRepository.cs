@@ -34,7 +34,7 @@ namespace PT.Infraestructure.Persistence.Common
 
         public async Task Update<T>(string table, T payload)
         {
-            var spString = $"[dbo].[usp_{table}_GET]";
+            var spString = $"[dbo].[usp_{table}_UPD]";
             await _dbConnection.ExecuteAsync(spString, payload, transaction: _dbTransaction);
         }
 
