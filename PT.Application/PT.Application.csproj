@@ -24,8 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Roles\Commands\RoleDelete\" />
-    <Folder Include="Features\Roles\Commands\RoleUpdate\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 

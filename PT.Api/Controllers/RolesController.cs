@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PT.Application.Features.Roles.Commands.RoleDelete;
 using PT.Application.Features.Roles.Commands.RoleInsert;
+using PT.Application.Features.Roles.Commands.RoleUpdate;
 using PT.Application.Features.Roles.Queries.RoleGetAll;
 using PT.Application.Features.Roles.Queries.RoleGetById;
 
@@ -33,6 +35,21 @@ namespace PT.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Insert([FromBody] RoleInsertCommand request)
         {
+            var response = await _mediator.Send(request);
+            return HandleResponse(response);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] RoleUpdateCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return HandleResponse(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var request = new RoleDeleteCommand(id);
             var response = await _mediator.Send(request);
             return HandleResponse(response);
         }

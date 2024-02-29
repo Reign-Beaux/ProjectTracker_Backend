@@ -19,7 +19,7 @@ namespace PT.Application.Services.ResponseManagement
         {
             response.Status = StatusResponse.NOT_FOUND;
             response.Message = ReplyMessages.QUERY_FAILED;
-            await InsertLogger(feature, StatusResponse.INTERNAL_SERVER_ERROR, message);
+            await InsertLogger(feature, StatusResponse.NOT_FOUND, message);
         }
 
         public async Task InteralServerError(IResponse response, Type feature, string message)
@@ -31,7 +31,7 @@ namespace PT.Application.Services.ResponseManagement
 
         private async Task InsertLogger(Type featureClass, int code, string message)
         {
-            var method = featureClass.GetType().Name;
+            var method = featureClass.Name;
             var nameSpace = featureClass.Namespace;
             var separator = nameSpace!.Contains("Commands") ? "Commands" : "Queries";
             var namespaceParts = featureClass.Namespace?.Split('.');
