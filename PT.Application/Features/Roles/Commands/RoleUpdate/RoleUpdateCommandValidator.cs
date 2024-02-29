@@ -8,7 +8,7 @@ namespace PT.Application.Features.Roles.Commands.RoleUpdate
         {
             RuleFor(x => x.Code)
                 .NotEmpty().WithMessage("El código es requerido.");
-            RuleFor(x => x.Description)
+            RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("La descripción es requerida");
         }
     }
