@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PT.Application.Models.Responses;
+using PT.Application.Services.ResponseManagement.Models;
 using PT.Application.Static;
 
 namespace PT.Api.Controllers

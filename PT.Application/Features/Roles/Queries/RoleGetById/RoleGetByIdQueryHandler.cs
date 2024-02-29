@@ -1,23 +1,21 @@
 ﻿using MediatR;
-using PT.Application.Features.Roles.Commands.RoleInsert;
-using PT.Application.Models.Responses;
-using PT.Application.Services.LoggerService;
+using PT.Application.Services.ResponseManagement;
+using PT.Application.Services.ResponseManagement.Models;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
-using PT.Infraestructure.Persistence.ProjectTrackerTools.Logger.Models;
 
 namespace PT.Application.Features.Roles.Queries.RoleGetById
 {
     public class RoleGetByIdQueryHandler : IRequestHandler<RoleGetByIdQuery, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly LoggerService _logger;
+        private readonly ResponseManagementService _responseManagement;
 
-        public RoleGetByIdQueryHandler(IUnitOfWorkProjectTracker projectTracker, LoggerService logger)
+        public RoleGetByIdQueryHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
         {
             _projectTracker = projectTracker;
-            _logger = logger;
+            _responseManagement = responseManagement;
         }
 
         public async Task<IResponse> Handle(RoleGetByIdQuery request, CancellationToken cancellationToken)
@@ -31,11 +29,7 @@ namespace PT.Application.Features.Roles.Queries.RoleGetById
             }
             catch (Exception ex)
             {
-                response.Status = StatusResponse.INTERNAL_SERVER_ERROR;
-                response.Message = ReplyMessages.FAILED_OPERATION;
-                var namespaceParts = typeof(RoleInsertCommandHandler).Namespace?.Split('.');
-                var feature = namespaceParts?.TakeWhile(part => part != "Queries").LastOrDefault();
-                await _logger.InsertLogger(new InsertLoggerParameters { Feature = feature, Method = GetType().Name, Code = StatusResponse.INTERNAL_SERVER_ERROR, Description = ex.Message });
+                await _responseManagement.InteralServerError(response, typeof(RoleGetByIdQueryHandler), ex.Message);
             }
 
             return response;

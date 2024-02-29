@@ -1,7 +1,6 @@
-﻿using FluentValidation.Results;
-using PT.Application.Static;
+﻿using PT.Application.Static;
 
-namespace PT.Application.Models.Responses
+namespace PT.Application.Services.ResponseManagement.Models
 {
     public class Response : IResponse
     {

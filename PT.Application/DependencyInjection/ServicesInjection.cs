@@ -1,7 +1,5 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using PT.Application.Features.Roles.Commands.RoleInsert;
-using PT.Application.Services.LoggerService;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PT.Application.Services.ResponseManagement;
 
 namespace PT.Application.DependencyInjection
 {
@@ -9,7 +7,7 @@ namespace PT.Application.DependencyInjection
     {
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
-            services.AddTransient<LoggerService>();
+            services.AddTransient<ResponseManagementService>();
 
             return services;
         }

@@ -1,6 +1,4 @@
-﻿using FluentValidation.Results;
-
-namespace PT.Application.Models.Responses
+﻿namespace PT.Application.Services.ResponseManagement.Models
 {
     public interface IResponse
     {

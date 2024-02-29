@@ -1,6 +1,5 @@
 ﻿using MediatR;
-using PT.Application.Models.Responses;
-using PT.Domain.ProjectTracker;
+using PT.Application.Services.ResponseManagement.Models;
 
 namespace PT.Application.Features.Roles.Queries.RoleGetById
 {
