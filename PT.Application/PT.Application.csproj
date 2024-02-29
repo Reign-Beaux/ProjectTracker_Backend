@@ -26,7 +26,6 @@
   <ItemGroup>
     <Folder Include="Features\Roles\Commands\RoleDelete\" />
     <Folder Include="Features\Roles\Commands\RoleUpdate\" />
-    <Folder Include="Features\Roles\Queries\RoleGetAll\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
