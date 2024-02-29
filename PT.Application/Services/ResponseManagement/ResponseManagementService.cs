@@ -18,7 +18,7 @@ namespace PT.Application.Services.ResponseManagement
         public async Task NotFound(IResponse response, Type feature, string message)
         {
             response.Status = StatusResponse.NOT_FOUND;
-            response.Message = ReplyMessages.QUERY_FAILED;
+            response.Message = message;
             await InsertLogger(feature, StatusResponse.NOT_FOUND, message);
         }
 
