@@ -1,9 +1,8 @@
-﻿namespace PT.Domain.ProjectTracker
+﻿using PT.Domain.Common;
+
+namespace PT.Domain.ProjectTracker
 {
-    public class Role
+    public class Role : BaseCatalog
     {
-        public int Id { get; set; }
-        public string? Code { get; set; }
-        public string? Name { get; set; }
     }
 }
