@@ -2,11 +2,11 @@ using PT.Application.DependencyInjection;
 using PT.Infraestructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCustomServices();
+builder.Services.AddCustomServices(builder.Configuration);
 builder.Services.AddUnitsOfWorkServices();
 builder.Services.AddFeaturesServices();
 builder.Services.AddValidatorsServices();
-builder.Services.AddBehaviorsServices(builder.Configuration);
+builder.Services.AddBehaviorsServices();
 
 // Add services to the container.
 

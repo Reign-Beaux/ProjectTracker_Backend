@@ -7,7 +7,7 @@ namespace PT.Application.DependencyInjection
 {
     public static class BehaviorsInjection
     {
-        public static IServiceCollection AddBehaviorsServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddBehaviorsServices(this IServiceCollection services)
         {
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));

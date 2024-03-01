@@ -16,7 +16,7 @@ namespace PT.Application.Services.Email
         {
             _settings = settings.Value;
             _logger = logger;
-            _smtpClient = new SmtpClient("smtp.gmail.com")
+            _smtpClient = new SmtpClient(_settings.Host)
             {
                 Port = _settings.Port,
                 Credentials = new NetworkCredential(_settings.Email, _settings.Password),
