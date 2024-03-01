@@ -2,7 +2,6 @@
 using PT.Application.Services.Email.Models;
 using PT.Application.Services.LoggerManagement;
 using System.Net;
-using System.Net.Http;
 using System.Net.Mail;
 
 namespace PT.Application.Services.Email
