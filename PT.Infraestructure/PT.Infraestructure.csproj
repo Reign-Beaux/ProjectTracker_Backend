@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\ProjectTracker\Users\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.28" />
     <PackageReference Include="Dapper.ParameterExtensions" Version="2022.7.7.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
