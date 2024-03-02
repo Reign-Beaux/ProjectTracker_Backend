@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Features\Commands\FeatureInsert\" />
-    <Folder Include="Features\Features\Commands\FeatureUpdate\" />
-    <Folder Include="Features\Features\Queries\FeatureGetAll\" />
-    <Folder Include="Features\Features\Queries\FeatureGetById\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
