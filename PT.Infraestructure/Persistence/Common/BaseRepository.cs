@@ -5,8 +5,8 @@ namespace PT.Infraestructure.Persistence.Common
 {
     public class BaseRepository
     {
-        private readonly IDbTransaction _dbTransaction;
-        private readonly IDbConnection _dbConnection;
+        protected readonly IDbTransaction _dbTransaction;
+        protected readonly IDbConnection _dbConnection;
 
         public BaseRepository(IDbTransaction dbTransaction)
         {

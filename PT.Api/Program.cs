@@ -4,7 +4,7 @@ using PT.Infraestructure.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCustomServices(builder.Configuration);
 builder.Services.AddUnitsOfWorkServices();
-builder.Services.AddFeaturesServices();
+builder.Services.AddFeaturesServices(builder.Configuration);
 builder.Services.AddValidatorsServices();
 builder.Services.AddBehaviorsServices();
 
