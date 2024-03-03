@@ -14,6 +14,13 @@ namespace PT.Application.Services.Logger
             _tools = tools;
         }
 
+        /// <summary>
+        /// To features
+        /// </summary>
+        /// <param name="featureClass"></param>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task InsertLogger(Type featureClass, int code, string message)
         {
             var method = featureClass.Name;
@@ -28,6 +35,13 @@ namespace PT.Application.Services.Logger
             _tools.Commit();
         }
 
+        /// <summary>
+        /// To services
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="method"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task InsertLogger(string service, string method, string message)
         {
             InsertLogParameters parameters = new() { Feature = service, Method = method, Code = StatusResponse.INTERNAL_SERVER_ERROR, Description = message };

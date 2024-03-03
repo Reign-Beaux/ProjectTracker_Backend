@@ -7,16 +7,16 @@ namespace PT.Application.Models.Responses
         public int Status { get; set; } = StatusResponse.OK;
         public string? Message { get; set; }
 
-        public void NotFound()
+        public void NotFound(string? message = null)
         {
             Status = StatusResponse.NOT_FOUND;
-            Message = ReplyMessages.RECORD_NOT_FOUND;
+            Message = message ?? GenericReplyMessages.RECORD_NOT_FOUND;
         }
 
-        public void InteralServerError()
+        public void InteralServerError(string? message = null)
         {
             Status = StatusResponse.INTERNAL_SERVER_ERROR;
-            Message = ReplyMessages.FAILED_OPERATION;
+            Message = message ?? GenericReplyMessages.FAILED_OPERATION;
         }
     }
 }

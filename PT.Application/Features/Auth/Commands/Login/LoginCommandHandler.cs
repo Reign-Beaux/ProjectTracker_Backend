@@ -2,9 +2,12 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PT.Application.Features.Auth.Commands.Login.Models;
+using PT.Application.Features.Auth.Commands.Login.Static;
 using PT.Application.Features.Roles.Commands.RoleInsert;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Helpers;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
+using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,13 +19,16 @@ namespace PT.Application.Features.Auth.Commands.Login
     public class LoginCommandHandler : IRequestHandler<LoginCommand, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
         private readonly JwtSettings _jwtSettings;
 
-        public LoginCommandHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement, IOptions<JwtSettings> jwtSettings, )
+        public LoginCommandHandler(
+            IUnitOfWorkProjectTracker projectTracker,
+            LogManagementService logManagement,
+            IOptions<JwtSettings> jwtSettings)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
             _jwtSettings = jwtSettings.Value;
         }
 
@@ -34,17 +40,31 @@ namespace PT.Application.Features.Auth.Commands.Login
             {
                 var user =
                     request.UsernameOrEmail!.Contains('@')
-                    ? _projectTracker.UsersRepository.GetByEmail(request.UsernameOrEmail)
-                    : _projectTracker.UsersRepository.GetByUsername(request.UsernameOrEmail);
+                    ? await _projectTracker.UsersRepository.GetByEmail(request.UsernameOrEmail)
+                    : await _projectTracker.UsersRepository.GetByUsername(request.UsernameOrEmail);
 
                 if (user is null)
                 {
-
+                    var message =
+                        request.UsernameOrEmail!.Contains('@')
+                        ? ReplyMessages.EMAIL_NOT_FOUND
+                        : ReplyMessages.USER_NOT_FOUND;
+                    response.NotFound(message);
+                    return response;
                 }
+                if (BCryptHelper.MatchText(request.Password!, user.Password!))
+                {
+                    response.NotFound(ReplyMessages.INCORRECT_PASSWORD);
+                    return response;
+                }
+
+                response.Message = ReplyMessages.LOGIN_SUCCESS;
+                response.Data.Token = GenerateToken(user);
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(RoleInsertCommandHandler), ex.Message);
+
+                await _logManagement.InsertLogger(typeof(RoleInsertCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

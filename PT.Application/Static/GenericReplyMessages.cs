@@ -1,6 +1,6 @@
 ﻿namespace PT.Application.Static
 {
-    public static class ReplyMessages
+    public static class GenericReplyMessages
     {
         public const string QUERY_SUCCESS = "Consulta exitosa.";
         public const string QUERY_EMPTY = "No se encontraron registros.";

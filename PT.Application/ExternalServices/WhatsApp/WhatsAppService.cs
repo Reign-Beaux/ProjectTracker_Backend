@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using PT.Application.Services.WhatsApp.Models;
+using PT.Application.ExternalServices.WhatsApp.Models;
 using System.Net.Http.Headers;
 
-namespace PT.Application.Services.WhatsApp
+namespace PT.Application.ExternalServices.WhatsApp
 {
     public class WhatsAppService
     {

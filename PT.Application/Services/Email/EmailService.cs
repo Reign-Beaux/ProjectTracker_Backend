@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using PT.Application.Services.Email.Models;
-using PT.Application.Services.LoggerManagement;
+using PT.Application.Services.Logger;
 using System.Net;
 using System.Net.Mail;
 
@@ -9,10 +9,10 @@ namespace PT.Application.Services.Email
     public class EmailService
     {
         private readonly EmailSettings _settings;
-        private readonly LoggerService _logger;
+        private readonly LogManagementService _logger;
         private readonly SmtpClient _smtpClient;
 
-        public EmailService(IOptions<EmailSettings> settings, LoggerService logger)
+        public EmailService(IOptions<EmailSettings> settings, LogManagementService logger)
         {
             _settings = settings.Value;
             _logger = logger;

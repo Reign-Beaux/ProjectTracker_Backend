@@ -1,4 +1,4 @@
-﻿namespace PT.Application.Services.WhatsApp.Models
+﻿namespace PT.Application.ExternalServices.WhatsApp.Models
 {
     public class WhatsAppSettings
     {
