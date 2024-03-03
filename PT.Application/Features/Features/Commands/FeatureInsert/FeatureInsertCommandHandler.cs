@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
@@ -10,12 +10,12 @@ namespace PT.Application.Features.Features.Commands.FeatureInsert
     public class FeatureInsertCommandHandler : IRequestHandler<FeatureInsertCommand, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
 
-        public FeatureInsertCommandHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
+        public FeatureInsertCommandHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
         }
 
         public async Task<IResponse> Handle(FeatureInsertCommand request, CancellationToken cancellationToken)
@@ -27,10 +27,12 @@ namespace PT.Application.Features.Features.Commands.FeatureInsert
                 var tableName = EntityToTable.Convert<Feature>();
                 await _projectTracker.FeatureRepository.Insert(tableName, request);
                 _projectTracker.Commit();
+
+                response.Message = GenericReplyMessages.SUCCESS_OPERATION;
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(FeatureInsertCommandHandler), ex.Message);
+                await _logManagement.InsertLogger(typeof(FeatureInsertCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;
