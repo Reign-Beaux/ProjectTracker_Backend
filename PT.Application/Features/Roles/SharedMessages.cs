@@ -1,4 +1,4 @@
-﻿namespace PT.Application.Features.Roles.Queries
+﻿namespace PT.Application.Features.Roles
 {
     public static class SharedMessages
     {

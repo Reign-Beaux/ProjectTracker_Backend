@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
@@ -10,12 +10,12 @@ namespace PT.Application.Features.Roles.Commands.RoleUpdate
     public class RoleUpdateCommandHandler : IRequestHandler<RoleUpdateCommand, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
 
-        public RoleUpdateCommandHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
+        public RoleUpdateCommandHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
         }
 
         public async Task<IResponse> Handle(RoleUpdateCommand request, CancellationToken cancellationToken)
@@ -25,20 +25,20 @@ namespace PT.Application.Features.Roles.Commands.RoleUpdate
             try
             {
                 var tableName = EntityToTable.Convert<Role>();
-                var currentRole = await _projectTracker.RolesRepository.GetById<Role>(tableName, request.Id);
-
-                if (currentRole is null)
+                var role = await _projectTracker.RolesRepository.GetById<Role>(tableName, request.Id);
+                if (role is null)
                 {
-                    await _responseManagement.NotFound(response, typeof(RoleUpdateCommandHandler), "Role no encontrado");
+                    response.NotFound(SharedMessages.ROLE_NOT_FOUND);
                     return response;
                 }
 
                 await _projectTracker.RolesRepository.Update(tableName, request);
                 _projectTracker.Commit();
+                response.Message = GenericReplyMessages.SUCCESS_OPERATION;
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(RoleUpdateCommandHandler), ex.Message);
+                await _logManagement.InsertLog(typeof(RoleUpdateCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

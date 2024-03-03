@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
@@ -10,12 +10,12 @@ namespace PT.Application.Features.Roles.Commands.RoleDelete
     public class RoleDeleteCommandHandler : IRequestHandler<RoleDeleteCommand, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
 
-        public RoleDeleteCommandHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
+        public RoleDeleteCommandHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
         }
 
         public async Task<IResponse> Handle(RoleDeleteCommand request, CancellationToken cancellationToken)
@@ -25,20 +25,20 @@ namespace PT.Application.Features.Roles.Commands.RoleDelete
             try
             {
                 var tableName = EntityToTable.Convert<Role>();
-                var currentRole = await _projectTracker.RolesRepository.GetById<Role>(tableName, request.Id);
-
-                if (currentRole is null)
+                var role = await _projectTracker.RolesRepository.GetById<Role>(tableName, request.Id);
+                if (role is null)
                 {
-                    await _responseManagement.NotFound(response, typeof(RoleDeleteCommandHandler), "Role no encontrado");
+                    response.NotFound(SharedMessages.ROLE_NOT_FOUND);
                     return response;
                 }
 
                 await _projectTracker.RolesRepository.Delete<Role>(tableName, request.Id);
                 _projectTracker.Commit();
+                response.Message = GenericReplyMessages.SUCCESS_OPERATION;
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(RoleDeleteCommandHandler), ex.Message);
+                await _logManagement.InsertLog(typeof(RoleDeleteCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;
