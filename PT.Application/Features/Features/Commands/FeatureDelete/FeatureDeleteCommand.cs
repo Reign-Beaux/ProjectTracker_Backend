@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
 
 namespace PT.Application.Features.Features.Commands.FeatureDelete
 {

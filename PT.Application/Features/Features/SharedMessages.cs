@@ -2,6 +2,6 @@
 {
     public static class SharedMessages
     {
-        public const string FEATURE_NOT_FOUND = "Funcionalidad no encontrada.";
+        public const string FEATURE_NOT_FOUND = "Feature no encontrada.";
     }
 }
