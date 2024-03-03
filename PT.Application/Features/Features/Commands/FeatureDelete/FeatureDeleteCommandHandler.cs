@@ -39,7 +39,7 @@ namespace PT.Application.Features.Features.Commands.FeatureDelete
             }
             catch (Exception ex)
             {
-                await _logManagement.InsertLogger(typeof(FeatureDeleteCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
+                await _logManagement.InsertLog(typeof(FeatureDeleteCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

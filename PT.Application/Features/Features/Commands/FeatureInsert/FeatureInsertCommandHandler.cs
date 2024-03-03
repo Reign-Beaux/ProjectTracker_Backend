@@ -32,7 +32,7 @@ namespace PT.Application.Features.Features.Commands.FeatureInsert
             }
             catch (Exception ex)
             {
-                await _logManagement.InsertLogger(typeof(FeatureInsertCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
+                await _logManagement.InsertLog(typeof(FeatureInsertCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

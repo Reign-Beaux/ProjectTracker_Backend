@@ -37,7 +37,7 @@ namespace PT.Application.Features.Features.Queries.FeatureGetById
             }
             catch (Exception ex)
             {
-                await _logManagement.InsertLogger(typeof(FeatureGetByIdQueryHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
+                await _logManagement.InsertLog(typeof(FeatureGetByIdQueryHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

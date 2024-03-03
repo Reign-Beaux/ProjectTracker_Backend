@@ -21,7 +21,7 @@ namespace PT.Application.Services.Logger
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task InsertLogger(Type featureClass, int code, string message)
+        public async Task InsertLog(Type featureClass, int code, string message)
         {
             var method = featureClass.Name;
             var nameSpace = featureClass.Namespace;
@@ -42,7 +42,7 @@ namespace PT.Application.Services.Logger
         /// <param name="method"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task InsertLogger(string service, string method, string message)
+        public async Task InsertLog(string service, string method, string message)
         {
             InsertLogParameters parameters = new() { Feature = service, Method = method, Code = StatusResponse.INTERNAL_SERVER_ERROR, Description = message };
             var tableName = EntityToTable.Convert<Log>();

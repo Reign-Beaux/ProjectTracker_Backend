@@ -62,7 +62,7 @@ namespace PT.Application.Features.Auth.Commands.Login
             }
             catch (Exception ex)
             {
-                await _logManagement.InsertLogger(typeof(RoleInsertCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
+                await _logManagement.InsertLog(typeof(RoleInsertCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

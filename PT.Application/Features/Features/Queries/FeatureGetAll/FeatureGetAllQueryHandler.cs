@@ -30,7 +30,7 @@ namespace PT.Application.Features.Features.Queries.FeatureGetAll
             }
             catch (Exception ex)
             {
-                await _logManagement.InsertLogger(typeof(FeatureGetAllQueryHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
+                await _logManagement.InsertLog(typeof(FeatureGetAllQueryHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;
