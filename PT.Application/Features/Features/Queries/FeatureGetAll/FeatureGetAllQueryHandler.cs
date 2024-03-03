@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
@@ -10,12 +10,12 @@ namespace PT.Application.Features.Features.Queries.FeatureGetAll
     public class FeatureGetAllQueryHandler : IRequestHandler<FeatureGetAllQuery, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
 
-        public FeatureGetAllQueryHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
+        public FeatureGetAllQueryHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
         }
 
         public async Task<IResponse> Handle(FeatureGetAllQuery request, CancellationToken cancellationToken)
@@ -26,10 +26,11 @@ namespace PT.Application.Features.Features.Queries.FeatureGetAll
             {
                 var tableName = EntityToTable.Convert<Feature>();
                 response.Data = await _projectTracker.FeatureRepository.GetAll<Feature>(tableName);
+                response.Message = GenericReplyMessages.QUERY_SUCCESS;
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(FeatureGetAllQueryHandler), ex.Message);
+                await _logManagement.InsertLogger(typeof(FeatureGetAllQueryHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

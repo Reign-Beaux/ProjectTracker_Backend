@@ -1,6 +1,6 @@
-﻿namespace PT.Application.Features.Auth.Commands.Login.Static
+﻿namespace PT.Application.Features.Auth.Commands.Login
 {
-    public static class ReplyMessages
+    public static class LoginCommandMesagges
     {
         public const string LOGIN_SUCCESS = "Bienvenido.";
         public const string USER_NOT_FOUND = "Usuario no encontrado.";

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
 
 namespace PT.Application.Features.Features.Queries.FeatureGetById
 {
@@ -7,7 +7,7 @@ namespace PT.Application.Features.Features.Queries.FeatureGetById
     {
         public int Id { get; set; }
 
-        public FeatureGetByIdQuery(int? id)
+        public FeatureGetByIdQuery(int? id = null)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
         }

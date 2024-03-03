@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PT.Application.Features.Auth.Commands.Login.Models;
-using PT.Application.Features.Auth.Commands.Login.Static;
 using PT.Application.Features.Roles.Commands.RoleInsert;
 using PT.Application.Helpers;
 using PT.Application.Models.Responses;
@@ -47,23 +46,22 @@ namespace PT.Application.Features.Auth.Commands.Login
                 {
                     var message =
                         request.UsernameOrEmail!.Contains('@')
-                        ? ReplyMessages.EMAIL_NOT_FOUND
-                        : ReplyMessages.USER_NOT_FOUND;
+                        ? LoginCommandMesagges.EMAIL_NOT_FOUND
+                        : LoginCommandMesagges.USER_NOT_FOUND;
                     response.NotFound(message);
                     return response;
                 }
                 if (BCryptHelper.MatchText(request.Password!, user.Password!))
                 {
-                    response.NotFound(ReplyMessages.INCORRECT_PASSWORD);
+                    response.NotFound(LoginCommandMesagges.INCORRECT_PASSWORD);
                     return response;
                 }
 
-                response.Message = ReplyMessages.LOGIN_SUCCESS;
+                response.Message = LoginCommandMesagges.LOGIN_SUCCESS;
                 response.Data.Token = GenerateToken(user);
             }
             catch (Exception ex)
             {
-
                 await _logManagement.InsertLogger(typeof(RoleInsertCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
