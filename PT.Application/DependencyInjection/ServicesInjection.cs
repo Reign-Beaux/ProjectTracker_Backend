@@ -14,7 +14,7 @@ namespace PT.Application.DependencyInjection
         public static IServiceCollection AddCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<EmailService>();
-            services.AddTransient<LoggerManagementService>();
+            services.AddTransient<LoggerService>();
             services.AddTransient<ResponseManagementService>();
             services.AddTransient<WhatsAppService>();
 

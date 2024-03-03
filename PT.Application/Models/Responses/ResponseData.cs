@@ -1,4 +1,4 @@
-﻿namespace PT.Application.Services.ResponseManagement.Models
+﻿namespace PT.Application.Models.Responses
 {
     public class ResponseData<T> : Response where T : new()
     {

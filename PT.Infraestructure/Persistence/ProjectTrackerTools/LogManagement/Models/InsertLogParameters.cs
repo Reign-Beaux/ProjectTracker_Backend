@@ -1,11 +1,10 @@
-﻿namespace PT.Domain.ProjectTrackerTools
+﻿namespace PT.Infraestructure.Persistence.ProjectTrackerTools.LogManagement.Models
 {
-    public class Logger
+    public class InsertLogParameters
     {
         public string? Feature { get; set; }
         public string? Method { get; set; }
         public int Code { get; set; }
         public string? Description { get; set; }
-        public DateTime? CreatedAt { get; set; }
     }
 }

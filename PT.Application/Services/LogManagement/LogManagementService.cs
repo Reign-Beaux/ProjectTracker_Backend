@@ -1,15 +1,15 @@
 ﻿using PT.Application.Static;
 using PT.Domain.ProjectTrackerTools;
-using PT.Infraestructure.Persistence.ProjectTrackerTools.Logger.Models;
+using PT.Infraestructure.Persistence.ProjectTrackerTools.LogManagement.Models;
 using PT.Infraestructure.Persistence.ProjectTrackerTools.UnitOfWork;
 
-namespace PT.Application.Services.LoggerManagement
+namespace PT.Application.Services.Logger
 {
-    public class LoggerManagementService
+    public class LogManagementService
     {
         private readonly IUnitOfWorkProjectTrackerTools _tools;
 
-        public LoggerManagementService(IUnitOfWorkProjectTrackerTools tools)
+        public LogManagementService(IUnitOfWorkProjectTrackerTools tools)
         {
             _tools = tools;
         }
@@ -22,17 +22,17 @@ namespace PT.Application.Services.LoggerManagement
             var namespaceParts = featureClass.Namespace?.Split('.');
             var featureName = namespaceParts?.TakeWhile(part => part != separator).LastOrDefault();
 
-            InsertLoggerParameters parameters = new() { Feature = featureName, Method = method, Code = code, Description = message };
-            var tableName = EntityToTable.Convert<Logger>();
-            await _tools.LoggerRepository.Insert(tableName, parameters);
+            InsertLogParameters parameters = new() { Feature = featureName, Method = method, Code = code, Description = message };
+            var tableName = EntityToTable.Convert<Log>();
+            await _tools.LogManagementRepository.Insert(tableName, parameters);
             _tools.Commit();
         }
 
         public async Task InsertLogger(string service, string method, string message)
         {
-            InsertLoggerParameters parameters = new() { Feature = service, Method = method, Code = StatusResponse.INTERNAL_SERVER_ERROR, Description = message };
-            var tableName = EntityToTable.Convert<Logger>();
-            await _tools.LoggerRepository.Insert(tableName, parameters);
+            InsertLogParameters parameters = new() { Feature = service, Method = method, Code = StatusResponse.INTERNAL_SERVER_ERROR, Description = message };
+            var tableName = EntityToTable.Convert<Log>();
+            await _tools.LogManagementRepository.Insert(tableName, parameters);
             _tools.Commit();
         }
     }

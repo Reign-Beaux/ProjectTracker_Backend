@@ -1,10 +1,10 @@
-﻿using PT.Infraestructure.Persistence.ProjectTrackerTools.Logger;
+﻿using PT.Infraestructure.Persistence.ProjectTrackerTools.LogManagement;
 
 namespace PT.Infraestructure.Persistence.ProjectTrackerTools.UnitOfWork
 {
     public interface IUnitOfWorkProjectTrackerTools
     {
-        public ILoggerRepository LoggerRepository { get; }
+        public ILogManagementRepository LogManagementRepository { get; }
         public void Commit();
     }
 }

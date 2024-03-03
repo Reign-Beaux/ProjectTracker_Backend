@@ -9,10 +9,10 @@ namespace PT.Application.Services.Email
     public class EmailService
     {
         private readonly EmailSettings _settings;
-        private readonly LoggerManagementService _logger;
+        private readonly LoggerService _logger;
         private readonly SmtpClient _smtpClient;
 
-        public EmailService(IOptions<EmailSettings> settings, LoggerManagementService logger)
+        public EmailService(IOptions<EmailSettings> settings, LoggerService logger)
         {
             _settings = settings.Value;
             _logger = logger;
