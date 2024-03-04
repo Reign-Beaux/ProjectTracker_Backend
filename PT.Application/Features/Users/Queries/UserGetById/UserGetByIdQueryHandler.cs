@@ -1,6 +1,7 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Features.Roles;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
@@ -10,12 +11,12 @@ namespace PT.Application.Features.Users.Queries.UserGetById
     public class UserGetByIdQueryHandler : IRequestHandler<UserGetByIdQuery, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
 
-        public UserGetByIdQueryHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
+        public UserGetByIdQueryHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
         }
 
         public async Task<IResponse> Handle(UserGetByIdQuery request, CancellationToken cancellationToken)
@@ -25,11 +26,19 @@ namespace PT.Application.Features.Users.Queries.UserGetById
             try
             {
                 var tableName = EntityToTable.Convert<User>();
-                response.Data = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
+                var role = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
+                if (role is null)
+                {
+                    response.NotFound(SharedMessages.ROLE_NOT_FOUND);
+                    return response;
+                }
+
+                response.Data = role;
+                response.Message = GenericReplyMessages.QUERY_SUCCESS;
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(UserGetByIdQueryHandler), ex.Message);
+                await _logManagement.InsertLog(typeof(UserGetByIdQueryHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

@@ -2,6 +2,6 @@
 {
     public static class SharedMessages
     {
-        public const string ROLE_NOT_FOUND = "Role no encontrad.";
+        public const string ROLE_NOT_FOUND = "Role no encontrado.";
     }
 }
