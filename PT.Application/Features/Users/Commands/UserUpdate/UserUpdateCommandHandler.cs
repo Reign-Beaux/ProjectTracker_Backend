@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
@@ -10,12 +10,12 @@ namespace PT.Application.Features.Users.Commands.UserUpdate
     public class UserUpdateCommandHandler : IRequestHandler<UserUpdateCommand, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
 
-        public UserUpdateCommandHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
+        public UserUpdateCommandHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
         }
 
         public async Task<IResponse> Handle(UserUpdateCommand request, CancellationToken cancellationToken)
@@ -25,20 +25,20 @@ namespace PT.Application.Features.Users.Commands.UserUpdate
             try
             {
                 var tableName = EntityToTable.Convert<User>();
-                var currentUser = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
-
-                if (currentUser is null)
+                var user = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
+                if (user is null)
                 {
-                    await _responseManagement.NotFound(response, typeof(UserUpdateCommandHandler), "Usuario no encontrado");
+                    response.NotFound(SharedMessages.USER_NOT_FOUND);
                     return response;
                 }
 
                 await _projectTracker.UsersRepository.Update(tableName, request);
                 _projectTracker.Commit();
+                response.Message = GenericReplyMessages.SUCCESS_OPERATION;
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(UserUpdateCommandHandler), ex.Message);
+                await _logManagement.InsertLog(typeof(UserUpdateCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;

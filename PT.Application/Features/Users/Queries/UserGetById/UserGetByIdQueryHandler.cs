@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using PT.Application.Features.Roles;
 using PT.Application.Models.Responses;
 using PT.Application.Services.Logger;
 using PT.Application.Static;
@@ -26,14 +25,14 @@ namespace PT.Application.Features.Users.Queries.UserGetById
             try
             {
                 var tableName = EntityToTable.Convert<User>();
-                var role = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
-                if (role is null)
+                var user = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
+                if (user is null)
                 {
-                    response.NotFound(SharedMessages.ROLE_NOT_FOUND);
+                    response.NotFound(SharedMessages.USER_NOT_FOUND);
                     return response;
                 }
 
-                response.Data = role;
+                response.Data = user;
                 response.Message = GenericReplyMessages.QUERY_SUCCESS;
             }
             catch (Exception ex)

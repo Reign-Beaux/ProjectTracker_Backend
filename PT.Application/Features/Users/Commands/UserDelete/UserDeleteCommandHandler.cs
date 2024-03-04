@@ -1,7 +1,8 @@
 ﻿using MediatR;
+using PT.Application.Features.Users;
 using PT.Application.Features.Users.Commands.UserDelete;
-using PT.Application.Services.ResponseManagement;
-using PT.Application.Services.ResponseManagement.Models;
+using PT.Application.Models.Responses;
+using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
@@ -11,12 +12,12 @@ namespace PT.Application.Users.Users.Commands.UserDelete
     public class UserDeleteCommandHandler : IRequestHandler<UserDeleteCommand, IResponse>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
-        private readonly ResponseManagementService _responseManagement;
+        private readonly LogManagementService _logManagement;
 
-        public UserDeleteCommandHandler(IUnitOfWorkProjectTracker projectTracker, ResponseManagementService responseManagement)
+        public UserDeleteCommandHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
         {
             _projectTracker = projectTracker;
-            _responseManagement = responseManagement;
+            _logManagement = logManagement;
         }
 
         public async Task<IResponse> Handle(UserDeleteCommand request, CancellationToken cancellationToken)
@@ -26,20 +27,20 @@ namespace PT.Application.Users.Users.Commands.UserDelete
             try
             {
                 var tableName = EntityToTable.Convert<User>();
-                var currentUser = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
-
-                if (currentUser is null)
+                var user = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
+                if (user is null)
                 {
-                    await _responseManagement.NotFound(response, typeof(UserDeleteCommandHandler), "User no encontrado");
+                    response.NotFound(SharedMessages.USER_NOT_FOUND);
                     return response;
                 }
 
                 await _projectTracker.UsersRepository.Delete<User>(tableName, request.Id);
                 _projectTracker.Commit();
+                response.Message = GenericReplyMessages.SUCCESS_OPERATION;
             }
             catch (Exception ex)
             {
-                await _responseManagement.InteralServerError(response, typeof(UserDeleteCommandHandler), ex.Message);
+                await _logManagement.InsertLog(typeof(UserDeleteCommandHandler), StatusResponse.INTERNAL_SERVER_ERROR, ex.Message);
             }
 
             return response;
