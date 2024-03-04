@@ -1,6 +1,6 @@
 ﻿namespace PT.Application.Features.Users
 {
-    public class SharedMessages
+    public class UsersMessages
     {
         public const string USER_NOT_FOUND = "User no encontrado.";
     }

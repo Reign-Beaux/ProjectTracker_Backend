@@ -28,7 +28,7 @@ namespace PT.Application.Features.Roles.Commands.RoleUpdate
                 var role = await _projectTracker.RolesRepository.GetById<Role>(tableName, request.Id);
                 if (role is null)
                 {
-                    response.NotFound(SharedMessages.ROLE_NOT_FOUND);
+                    response.NotFound(RolesMessages.ROLE_NOT_FOUND);
                     return response;
                 }
 

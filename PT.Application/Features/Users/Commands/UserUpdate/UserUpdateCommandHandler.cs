@@ -33,7 +33,7 @@ namespace PT.Application.Features.Users.Commands.UserUpdate
                 var user = await _projectTracker.UsersRepository.GetById<User>(tableName, request.Id);
                 if (user is null)
                 {
-                    response.NotFound(SharedMessages.USER_NOT_FOUND);
+                    response.NotFound(UsersMessages.USER_NOT_FOUND);
                     return response;
                 }
                 var parameters = _mapper.Map<UserUpdateParameters>(request);

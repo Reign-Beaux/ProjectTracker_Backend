@@ -28,7 +28,7 @@ namespace PT.Application.Features.Features.Queries.FeatureGetById
                 var feature = await _projectTracker.FeatureRepository.GetById<Feature>(tableName, request.Id);
                 if (feature is null)
                 {
-                    response.NotFound(SharedMessages.FEATURE_NOT_FOUND);
+                    response.NotFound(FeaturesMessages.FEATURE_NOT_FOUND);
                     return response;
                 }
 
