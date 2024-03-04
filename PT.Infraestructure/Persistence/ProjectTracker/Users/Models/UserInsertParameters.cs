@@ -1,10 +1,8 @@
-﻿using MediatR;
-using PT.Application.Models.Responses;
-
-namespace PT.Application.Features.Users.Commands.UserInsert
+﻿namespace PT.Infraestructure.Persistence.ProjectTracker.Users.Models
 {
-    public class UserInsertCommand : IRequest<IResponse>
+    public class UserInsertParameters
     {
+        public string? Username { get; set; }
         public string? Password { get; set; }
         public string? Email { get; set; }
         public string? Name { get; set; }

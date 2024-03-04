@@ -8,7 +8,7 @@ namespace PT.Application.Static
         private static readonly Dictionary<Type, string> EntityTableMapping = new()
         {
             { typeof(Feature), "Features" },
-            { typeof(Log), "Logger" },
+            { typeof(Log), "Log" },
             //{ typeof(RoleFeature), "Role_Features" },
             { typeof(Role), "Roles" },
             //{ typeof(UserRole), "User_Roles" },

@@ -6,8 +6,6 @@ namespace PT.Application.Features.Users.Commands.UserInsert
     {
         public UserInsertCommandValidator()
         {
-            RuleFor(x => x.Username)
-                .NotEmpty().WithMessage("El usuario es requerido.");
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("La contraseña es requerido.");
             RuleFor(x => x.Email)

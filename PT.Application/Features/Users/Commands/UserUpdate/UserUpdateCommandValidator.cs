@@ -6,10 +6,6 @@ namespace PT.Application.Features.Users.Commands.UserUpdate
     {
         public UserUpdateCommandValidator()
         {
-            RuleFor(x => x.Username)
-                .NotEmpty().WithMessage("El usuario es requerido.");
-            RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("La contraseña es requerido.");
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("El correo electrónico es requerido.");
             RuleFor(x => x.Name)
