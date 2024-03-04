@@ -49,7 +49,7 @@ namespace PT.Application.Services.Email
             }
             catch (Exception ex)
             {
-                await _logger.InsertLogger(typeof(EmailService).Name, "Send", ex.Message);
+                await _logger.InsertLog(typeof(EmailService).Name, "Send", ex.Message);
             }
         }
     }
