@@ -51,7 +51,9 @@ namespace PT.Application.Features.Auth.Commands.Login
                     response.NotFound(message);
                     return response;
                 }
-                if (!BCryptHelper.MatchText(request.Password!, user.Password!))
+                var requestPassword = AesHelper.Decrypt(request.Password!);
+
+                if (!BCryptHelper.MatchText(requestPassword, user.Password!))
                 {
                     response.NotFound(LoginCommandMesagges.INCORRECT_PASSWORD);
                     return response;
@@ -75,7 +77,8 @@ namespace PT.Application.Features.Auth.Commands.Login
             var claims = new List<Claim>
             {
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
+                new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+                new("name", $"{user.Name} {user.PaternalLastname} {user.MaternalLastname}")
             };
 
             var expires = DateTime.UtcNow.AddDays(1);
