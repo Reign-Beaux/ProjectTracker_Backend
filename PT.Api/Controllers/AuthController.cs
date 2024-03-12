@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PT.Application.Features.Auth.Commands.Login;
 
 namespace PT.Api.Controllers
 {
@@ -9,6 +10,13 @@ namespace PT.Api.Controllers
     {
         public AuthController(IMediator mediator) : base(mediator)
         {
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return HandleResponse(response);
         }
     }
 }

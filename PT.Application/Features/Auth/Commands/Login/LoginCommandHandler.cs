@@ -51,7 +51,7 @@ namespace PT.Application.Features.Auth.Commands.Login
                     response.NotFound(message);
                     return response;
                 }
-                if (BCryptHelper.MatchText(request.Password!, user.Password!))
+                if (!BCryptHelper.MatchText(request.Password!, user.Password!))
                 {
                     response.NotFound(LoginCommandMesagges.INCORRECT_PASSWORD);
                     return response;
@@ -71,7 +71,7 @@ namespace PT.Application.Features.Auth.Commands.Login
         private string GenerateToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
             var claims = new List<Claim>
             {
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
