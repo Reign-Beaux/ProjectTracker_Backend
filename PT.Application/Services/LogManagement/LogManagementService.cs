@@ -25,7 +25,7 @@ namespace PT.Application.Services.Logger
         {
             var method = featureClass.Name;
             var nameSpace = featureClass.Namespace;
-            var separator = nameSpace!.Contains("Commands") ? "Commands" : "Queries";
+            var separator = nameSpace.Contains("Commands") ? "Commands" : "Queries";
             var namespaceParts = featureClass.Namespace?.Split('.');
             var featureName = namespaceParts?.TakeWhile(part => part != separator).LastOrDefault();
 

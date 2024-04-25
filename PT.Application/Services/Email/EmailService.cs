@@ -31,13 +31,13 @@ namespace PT.Application.Services.Email
                 var message = new MailMessage();
                 message.From = new MailAddress(request.From!);
                 message.Subject = request.Subject;
-                foreach (var to in request.To!.Split(";"))
+                foreach (var to in request.To.Split(";"))
                 {
                     message.To.Add(new MailAddress(to));
                 }
                 if (!string.IsNullOrEmpty(request.Bcc))
                 {
-                    foreach (var bcc in request.Bcc!.Split(";"))
+                    foreach (var bcc in request.Bcc.Split(";"))
                     {
                         message.Bcc.Add(new MailAddress(bcc));
                     }

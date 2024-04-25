@@ -18,7 +18,7 @@ namespace PT.Application.Static
         public static string Convert<T>()
         {
             Type entityType = typeof(T);
-            if (EntityTableMapping.TryGetValue(entityType, out string? tableName))
+            if (EntityTableMapping.TryGetValue(entityType, out string tableName))
             {
                 return tableName;
             }

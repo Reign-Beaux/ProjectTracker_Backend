@@ -38,14 +38,14 @@ namespace PT.Application.Features.Auth.Commands.Login
             try
             {
                 var user =
-                    request.UsernameOrEmail!.Contains('@')
+                    request.UsernameOrEmail.Contains('@')
                     ? await _projectTracker.UsersRepository.GetByEmail(request.UsernameOrEmail)
                     : await _projectTracker.UsersRepository.GetByUsername(request.UsernameOrEmail);
 
                 if (user is null)
                 {
                     var message =
-                        request.UsernameOrEmail!.Contains('@')
+                        request.UsernameOrEmail.Contains('@')
                         ? LoginCommandMesagges.EMAIL_NOT_FOUND
                         : LoginCommandMesagges.USER_NOT_FOUND;
                     response.NotFound(message);
