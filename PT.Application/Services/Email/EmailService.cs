@@ -29,7 +29,7 @@ namespace PT.Application.Services.Email
             try
             {
                 var message = new MailMessage();
-                message.From = new MailAddress(request.From!);
+                message.From = new MailAddress(request.From);
                 message.Subject = request.Subject;
                 foreach (var to in request.To.Split(";"))
                 {

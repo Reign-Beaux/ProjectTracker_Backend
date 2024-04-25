@@ -11,7 +11,7 @@ namespace PT.Infraestructure.Persistence.Common
         public BaseRepository(IDbTransaction dbTransaction)
         {
             _dbTransaction = dbTransaction;
-            _dbConnection = dbTransaction.Connection!;
+            _dbConnection = dbTransaction.Connection;
         }
 
         public async Task<List<T>> GetAll<T>(string table)
