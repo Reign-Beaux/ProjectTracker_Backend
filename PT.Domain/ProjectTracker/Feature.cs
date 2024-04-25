@@ -4,6 +4,6 @@ namespace PT.Domain.ProjectTracker
 {
     public class Feature : BaseCatalog
     {
-        public string? Path { get; set; }
+        public string Path { get; set; }
     }
 }
