@@ -5,7 +5,7 @@ namespace PT.Application.Features.Auth.Commands.Login
 {
     public class LoginCommand : IRequest<IResponse>
     {
-        public string? UsernameOrEmail { get; set; }
-        public string? Password { get; set; }
+        public string UsernameOrEmail { get; set; }
+        public string Password { get; set; }
     }
 }

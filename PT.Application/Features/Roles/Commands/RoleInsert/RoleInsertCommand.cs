@@ -5,7 +5,7 @@ namespace PT.Application.Features.Roles.Commands.RoleInsert
 {
     public class RoleInsertCommand : IRequest<IResponse>
     {
-        public string? Code { get; set; }
-        public string? Name { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
 }
