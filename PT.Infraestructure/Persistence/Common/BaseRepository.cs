@@ -20,7 +20,7 @@ namespace PT.Infraestructure.Persistence.Common
             return (await _dbConnection.QueryAsync<T>(spString, transaction: _dbTransaction)).ToList();
         }
 
-        public async Task<T?> GetById<T>(string table, int id)
+        public async Task<T> GetById<T>(string table, int id)
         {
             var spString = $"[dbo].[usp_{table}_GET]";
             return await _dbConnection.QuerySingleOrDefaultAsync<T>(spString, new { Id = id }, transaction: _dbTransaction);
