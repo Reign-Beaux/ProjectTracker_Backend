@@ -31,7 +31,7 @@ namespace PT.Application.Features.Users.Commands.UserInsert
             try
             {
                 var tableName = EntityToTable.Convert<User>();
-                var parameters = _mapper.Map<UserInsertParameters>(request);
+                var parameters = _mapper.Map<UserInsertPayload>(request);
                 var fullname = $"{request.Name} {request.PaternalLastname} {request.MaternalLastname}" ;
                 parameters.Password = BCryptHelper.EncriptText(request.Password);
                 parameters.Username = CreateUser.Handle(fullname);

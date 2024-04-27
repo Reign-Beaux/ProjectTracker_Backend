@@ -1,9 +1,9 @@
 ﻿namespace PT.Infraestructure.Persistence.ProjectTracker.Users.Models
 {
-    public class UserUpdateParameters
+    public class UserInsertPayload
     {
-        public int Id { get; set; }
         public string Username { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string PaternalLastname { get; set; }

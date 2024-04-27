@@ -36,7 +36,7 @@ namespace PT.Application.Features.Users.Commands.UserUpdate
                     response.NotFound(UsersMessages.USER_NOT_FOUND);
                     return response;
                 }
-                var parameters = _mapper.Map<UserUpdateParameters>(request);
+                var parameters = _mapper.Map<UserUpdatePayload>(request);
                 var fullname = $"{request.Name} {request.PaternalLastname} {request.MaternalLastname}";
                 parameters.Username = CreateUser.Handle(fullname);
                 await _projectTracker.UsersRepository.Update(tableName, parameters);

@@ -9,8 +9,8 @@ namespace PT.Application.Features.Users
     {
         public MappingUsers()
         {
-            CreateMap<UserInsertCommand, UserInsertParameters>();
-            CreateMap<UserUpdateCommand, UserUpdateParameters>();
+            CreateMap<UserInsertCommand, UserInsertPayload>();
+            CreateMap<UserUpdateCommand, UserUpdatePayload>();
         }
     }
 }
