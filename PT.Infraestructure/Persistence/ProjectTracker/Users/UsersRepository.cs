@@ -24,7 +24,7 @@ namespace PT.Infraestructure.Persistence.ProjectTracker.Users
             return await _dbConnection.QuerySingleOrDefaultAsync<User>(spString, new { Email = email }, transaction: _dbTransaction);
         }
 
-        public async Task<List<User>> GetByFilters(GetByFiltersPayload payload)
+        public async Task<List<User>> GetByFilters(UserGetByFiltersPayload payload)
         {
             var spString = "[dbo].[usp_Users_GET] @UserName, @Name, @PaternalLastname, @MaternalLastname, @Email";
             return (await _dbConnection.QueryAsync<User>(spString, payload, transaction: _dbTransaction)).ToList();

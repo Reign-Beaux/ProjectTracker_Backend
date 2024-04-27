@@ -8,6 +8,6 @@ namespace PT.Infraestructure.Persistence.ProjectTracker.Users
     {
         Task<User> GetByUsername(string username);
         Task<User> GetByEmail(string email);
-        Task<List<User>> GetByFilters(GetByFiltersPayload payload);
+        Task<List<User>> GetByFilters(UserGetByFiltersPayload payload);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace PT.Infraestructure.Persistence.ProjectTracker.Users.Models
 {
-    public class GetByFiltersPayload
+    public class UserGetByFiltersPayload
     {
         public string UserName { get; set; }
         public string Name { get; set; }
