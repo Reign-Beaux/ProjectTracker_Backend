@@ -20,7 +20,7 @@ namespace PT.Application.Features.Users.Queries.UserGetById
 
         public async Task<IResponse> Handle(UserGetByIdQuery request, CancellationToken cancellationToken)
         {
-            var response = new ResponseData<User?>();
+            var response = new ResponseData<User>();
 
             try
             {
