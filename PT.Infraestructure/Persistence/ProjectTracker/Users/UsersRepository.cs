@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.Common;
+using PT.Infraestructure.Persistence.ProjectTracker.Users.Models;
 using System.Data;
 
 namespace PT.Infraestructure.Persistence.ProjectTracker.Users
@@ -21,6 +22,12 @@ namespace PT.Infraestructure.Persistence.ProjectTracker.Users
         {
             var spString = "[dbo].[usp_Users_GET] @Email = @Email";
             return await _dbConnection.QuerySingleOrDefaultAsync<User>(spString, new { Email = email }, transaction: _dbTransaction);
+        }
+
+        public async Task<List<User>> GetByFilters(GetByFiltersPayload payload)
+        {
+            var spString = "[dbo].[usp_Users_GET] @UserName, @Name, @PaternalLastname, @MaternalLastname, @Email";
+            return (await _dbConnection.QueryAsync<User>(spString, payload, transaction: _dbTransaction)).ToList();
         }
     }
 }

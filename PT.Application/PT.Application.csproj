@@ -23,4 +23,8 @@
     <ProjectReference Include="..\PT.Infraestructure\PT.Infraestructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Users\Queries\UserGetByFilters\" />
+  </ItemGroup>
+
 </Project>
