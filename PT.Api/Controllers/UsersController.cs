@@ -4,6 +4,7 @@ using PT.Application.Features.Users.Commands.UserDelete;
 using PT.Application.Features.Users.Commands.UserInsert;
 using PT.Application.Features.Users.Commands.UserUpdate;
 using PT.Application.Features.Users.Queries.UserGetAll;
+using PT.Application.Features.Users.Queries.UserGetByFilters;
 using PT.Application.Features.Users.Queries.UserGetById;
 
 namespace PT.Api.Controllers
@@ -28,6 +29,13 @@ namespace PT.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var request = new UserGetByIdQuery(id);
+            var response = await _mediator.Send(request);
+            return HandleResponse(response);
+        }
+
+        [HttpPost("GetByFilters")]
+        public async Task<IActionResult> GetByFilters([FromBody] UserGetByFiltersQuery request)
+        {
             var response = await _mediator.Send(request);
             return HandleResponse(response);
         }
