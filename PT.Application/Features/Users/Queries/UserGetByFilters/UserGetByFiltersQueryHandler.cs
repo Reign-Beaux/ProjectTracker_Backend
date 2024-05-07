@@ -6,7 +6,8 @@ using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
-using System.Collections.Generic;
+using PT.Infraestructure.Persistence.ProjectTracker.Users.Models;
+using System.Xml.Linq;
 
 namespace PT.Application.Features.Users.Queries.UserGetByFilters
 {
@@ -29,7 +30,8 @@ namespace PT.Application.Features.Users.Queries.UserGetByFilters
 
             try
             {
-                List<User> users = await _projectTracker.UsersRepository.GetByFilters(request);
+                var payload = FillPayload(request);
+                List<User> users = await _projectTracker.UsersRepository.GetByFilters(payload);
                 var data = FillData(users);
 
                 response.Data = data;
@@ -40,6 +42,22 @@ namespace PT.Application.Features.Users.Queries.UserGetByFilters
             }
 
             return response;
+        }
+
+        private static UserGetByFiltersPayload FillPayload(UserGetByFiltersQuery request)
+        {
+            return new UserGetByFiltersPayload
+            {
+                UserName = request.UsersFilter.UserName,
+                Name = request.UsersFilter.Name,
+                PaternalLastName = request.UsersFilter.PaternalLastName,
+                MaternalLastname = request.UsersFilter.MaternalLastname,
+                Email = request.UsersFilter.Email,
+                PageSize = request.Pagination.PageSize,
+                PageNumber = request.Pagination.Page + 1,
+                OrderBy = request.Sort[0].Field,
+                SortDirection = request.Sort[0].Sort,
+            };
         }
 
         private List<UserGetByFiltersQueryResponse> FillData(List<User> users)
