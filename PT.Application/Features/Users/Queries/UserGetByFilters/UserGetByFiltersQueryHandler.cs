@@ -55,8 +55,8 @@ namespace PT.Application.Features.Users.Queries.UserGetByFilters
                 Email = request.UsersFilter.Email,
                 PageSize = request.Pagination.PageSize,
                 PageNumber = request.Pagination.Page + 1,
-                OrderBy = request.Sort[0].Field,
-                SortDirection = request.Sort[0].Sort,
+                OrderBy = request.Sort.Field,
+                SortDirection = request.Sort.Sort,
             };
         }
 

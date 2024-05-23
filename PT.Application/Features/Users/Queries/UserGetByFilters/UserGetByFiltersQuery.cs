@@ -17,6 +17,6 @@ namespace PT.Application.Features.Users.Queries.UserGetByFilters
     {
         public UsersFilterModel UsersFilter { get; set; }
         public PaginationModel Pagination { get; set; }
-        public List<SortModel> Sort { get; set; }
+        public SortModel Sort { get; set; }
     }
 }
