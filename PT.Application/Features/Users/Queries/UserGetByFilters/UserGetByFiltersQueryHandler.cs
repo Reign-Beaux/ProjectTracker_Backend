@@ -7,7 +7,6 @@ using PT.Application.Static;
 using PT.Domain.ProjectTracker;
 using PT.Infraestructure.Persistence.ProjectTracker.UnitOfWork;
 using PT.Infraestructure.Persistence.ProjectTracker.Users.Models;
-using System.Xml.Linq;
 
 namespace PT.Application.Features.Users.Queries.UserGetByFilters
 {

@@ -39,6 +39,10 @@ namespace PT.Application.Features.Users.Commands.UserUpdate
                 var parameters = _mapper.Map<UserUpdatePayload>(request);
                 var fullname = $"{request.Name} {request.PaternalLastname} {request.MaternalLastname}";
                 parameters.Username = CreateUser.Handle(fullname);
+
+                if (string.IsNullOrEmpty(parameters.Password)) 
+                    parameters.Password = user.Password;
+
                 await _projectTracker.UsersRepository.Update(tableName, parameters);
                 _projectTracker.Commit();
                 response.Message = GenericReplyMessages.SUCCESS_OPERATION;

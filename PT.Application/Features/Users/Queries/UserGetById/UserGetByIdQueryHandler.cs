@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using PT.Application.Models.Responses;
 using PT.Application.Services.Logger;
 using PT.Application.Static;
@@ -11,16 +12,18 @@ namespace PT.Application.Features.Users.Queries.UserGetById
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
         private readonly LogManagementService _logManagement;
+        private readonly IMapper _mapper;
 
-        public UserGetByIdQueryHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement)
+        public UserGetByIdQueryHandler(IUnitOfWorkProjectTracker projectTracker, LogManagementService logManagement, IMapper mapper)
         {
             _projectTracker = projectTracker;
             _logManagement = logManagement;
+            _mapper = mapper;
         }
 
         public async Task<IResponse> Handle(UserGetByIdQuery request, CancellationToken cancellationToken)
         {
-            var response = new ResponseData<User>();
+            var response = new ResponseData<UserGetByIdQueryResponse>();
 
             try
             {
@@ -32,7 +35,8 @@ namespace PT.Application.Features.Users.Queries.UserGetById
                     return response;
                 }
 
-                response.Data = user;
+                response.Data = _mapper.Map<UserGetByIdQueryResponse>(user);
+                response.Data.Password = string.Empty;
                 response.Message = GenericReplyMessages.QUERY_SUCCESS;
             }
             catch (Exception ex)
