@@ -80,7 +80,7 @@ namespace PT.Application.Features.Auth.Commands.Login
                 new("name", $"{user.Name} {user.PaternalLastname} {user.MaternalLastname}")
             };
 
-            var expires = DateTime.UtcNow.AddDays(1);
+            var expires = DateTime.UtcNow.AddDays(6);
 
             var token = new JwtSecurityToken(
                issuer: _jwtSettings.Issuer,
