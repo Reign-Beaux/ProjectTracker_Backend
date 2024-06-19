@@ -1,8 +1,8 @@
-﻿using PT.Infraestructure.Persistence.Common;
+﻿using PT.Infraestructure.Persistence.Interfaces;
 
 namespace PT.Infraestructure.Persistence.ProjectTrackerTools.LogManagement
 {
-    public interface ILogManagementRepository : IBaseRepository
+    public interface ILogManagementRepository : IRepository
     {
     }
 }

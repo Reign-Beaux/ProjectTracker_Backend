@@ -1,4 +1,4 @@
-﻿namespace PT.Application.Features.Auth.Commands.Login.Models
+﻿namespace PT.Application.Models.Settings
 {
     public class JwtSettings
     {

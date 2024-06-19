@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PT.Application.Features.Auth.Commands.Login.Models;
 using PT.Application.Features.Roles.Commands.RoleInsert;
 using PT.Application.Helpers;
 using PT.Application.Models.Responses;
+using PT.Application.Models.Settings;
 using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
@@ -51,9 +51,8 @@ namespace PT.Application.Features.Auth.Commands.Login
                     response.NotFound(message);
                     return response;
                 }
-                var requestPassword = AesHelper.Decrypt(request.Password);
 
-                if (!BCryptHelper.MatchText(requestPassword, user.Password))
+                if (!BCryptHelper.MatchText(request.Password, user.Password))
                 {
                     response.NotFound(LoginCommandMesagges.INCORRECT_PASSWORD);
                     return response;
@@ -81,7 +80,7 @@ namespace PT.Application.Features.Auth.Commands.Login
                 new("name", $"{user.Name} {user.PaternalLastname} {user.MaternalLastname}")
             };
 
-            var expires = DateTime.UtcNow.AddDays(1);
+            var expires = DateTime.UtcNow.AddDays(6);
 
             var token = new JwtSecurityToken(
                issuer: _jwtSettings.Issuer,

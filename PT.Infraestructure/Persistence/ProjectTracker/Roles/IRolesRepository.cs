@@ -1,8 +1,8 @@
-﻿using PT.Infraestructure.Persistence.Common;
+﻿using PT.Infraestructure.Persistence.Interfaces;
 
 namespace PT.Infraestructure.Persistence.ProjectTracker.Roles
 {
-    public interface IRolesRepository : IBaseRepository
+    public interface IRolesRepository : IRepository
     {
     }
 }

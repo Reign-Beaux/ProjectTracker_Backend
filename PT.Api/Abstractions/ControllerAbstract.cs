@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using PT.Application.Models.Responses;
 using PT.Application.Static;
 
-namespace PT.Api.Controllers
+namespace PT.Api.Abstractions
 {
-    public class BaseController : ControllerBase
+    public abstract class ControllerAbstract : ControllerBase
     {
         protected readonly IMediator _mediator;
 
-        public BaseController(IMediator mediator)
+        public ControllerAbstract(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -20,12 +20,13 @@ namespace PT.Api.Controllers
             {
                 { StatusResponse.OK, Ok },
                 { StatusResponse.BAD_REQUEST, BadRequest },
-                { StatusResponse.UNAUTHORIZED, Unauthorized },
                 { StatusResponse.NOT_FOUND, NotFound },
                 { StatusResponse.INTERNAL_SERVER_ERROR, response => StatusCode(500, response.Message) },
+                { StatusResponse.UNAUTHORIZED, Unauthorized }
             };
 
             return responseDictionary[response.Status](response);
         }
     }
+
 }

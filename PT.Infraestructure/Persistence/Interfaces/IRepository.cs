@@ -1,6 +1,6 @@
-﻿namespace PT.Infraestructure.Persistence.Common
+﻿namespace PT.Infraestructure.Persistence.Interfaces
 {
-    public interface IBaseRepository
+    public interface IRepository
     {
         Task<List<T>> GetAll<T>(string table);
         Task<T> GetById<T>(string table, int id);
