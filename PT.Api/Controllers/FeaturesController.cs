@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PT.Api.Abstractions;
 using PT.Application.Features.Features.Commands.FeatureDelete;
 using PT.Application.Features.Features.Commands.FeatureInsert;
 using PT.Application.Features.Features.Commands.FeatureUpdate;
@@ -10,7 +11,7 @@ namespace PT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeaturesController : BaseController
+    public class FeaturesController : ControllerAbstract
     {
         public FeaturesController(IMediator mediator) : base(mediator)
         {

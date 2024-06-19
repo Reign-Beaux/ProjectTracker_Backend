@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PT.Api.Abstractions;
 using PT.Application.Features.Roles.Commands.RoleDelete;
 using PT.Application.Features.Roles.Commands.RoleInsert;
 using PT.Application.Features.Roles.Commands.RoleUpdate;
@@ -10,7 +11,7 @@ namespace PT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : BaseController
+    public class RolesController : ControllerAbstract
     {
         public RolesController(IMediator mediator) : base(mediator)
         {

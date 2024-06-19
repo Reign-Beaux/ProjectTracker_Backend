@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PT.Api.Abstractions;
 using PT.Application.Features.Users.Commands.UserDelete;
 using PT.Application.Features.Users.Commands.UserInsert;
 using PT.Application.Features.Users.Commands.UserUpdate;
@@ -11,7 +12,7 @@ namespace PT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : BaseController
+    public class UsersController : ControllerAbstract
     {
         public UsersController(IMediator mediator) : base(mediator)
         {
