@@ -3,6 +3,8 @@ using PT.Infraestructure.DependencyInjection;
 
 var cors = "Cors";
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSettingsInjection(builder.Configuration);
 builder.Services.AddCustomServices(builder.Configuration);
 builder.Services.AddUnitsOfWorkServices();
 builder.Services.AddExternalServices(builder.Configuration);

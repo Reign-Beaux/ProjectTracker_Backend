@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PT.Application.Features.Auth.Commands.Login.Models;
 using PT.Application.Features.Users;
 using System.Reflection;
 
@@ -14,8 +13,6 @@ namespace PT.Application.DependencyInjection
         {
             var assembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(assembly);
-
-            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             var mapperConfig = new MapperConfiguration(configuration =>
             {

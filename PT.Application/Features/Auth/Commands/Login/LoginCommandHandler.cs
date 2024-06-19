@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PT.Application.Features.Auth.Commands.Login.Models;
 using PT.Application.Features.Roles.Commands.RoleInsert;
 using PT.Application.Helpers;
 using PT.Application.Models.Responses;
+using PT.Application.Models.Settings;
 using PT.Application.Services.Logger;
 using PT.Application.Static;
 using PT.Domain.ProjectTracker;
