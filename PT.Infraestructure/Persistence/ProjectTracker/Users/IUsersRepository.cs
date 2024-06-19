@@ -1,10 +1,10 @@
 ﻿using PT.Domain.ProjectTracker;
-using PT.Infraestructure.Persistence.Common;
+using PT.Infraestructure.Persistence.Interfaces;
 using PT.Infraestructure.Persistence.ProjectTracker.Users.Models;
 
 namespace PT.Infraestructure.Persistence.ProjectTracker.Users
 {
-    public interface IUsersRepository : IBaseRepository
+    public interface IUsersRepository : IRepository
     {
         Task<User> GetByUsername(string username);
         Task<User> GetByEmail(string email);

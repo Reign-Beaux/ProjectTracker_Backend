@@ -1,6 +1,6 @@
-﻿namespace PT.Domain.Common
+﻿namespace PT.Domain.Abstractions
 {
-    public abstract class BaseCatalog
+    public abstract class CatalogAbstractions
     {
         public int Id { get; set; }
         public string Code { get; set; }

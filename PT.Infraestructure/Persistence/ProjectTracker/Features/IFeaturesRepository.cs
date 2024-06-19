@@ -1,8 +1,8 @@
-﻿using PT.Infraestructure.Persistence.Common;
+﻿using PT.Infraestructure.Persistence.Interfaces;
 
 namespace PT.Infraestructure.Persistence.ProjectTracker.Features
 {
-    public interface IFeaturesRepository : IBaseRepository
+    public interface IFeaturesRepository : IRepository
     {
     }
 }

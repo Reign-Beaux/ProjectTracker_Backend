@@ -1,8 +1,8 @@
-﻿using PT.Domain.Common;
+﻿using PT.Domain.Abstractions;
 
 namespace PT.Domain.ProjectTracker
 {
-    public class Role : BaseCatalog
+    public class Role : CatalogAbstractions
     {
     }
 }

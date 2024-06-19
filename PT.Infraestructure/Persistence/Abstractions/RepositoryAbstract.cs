@@ -1,14 +1,14 @@
 ﻿using Dapper;
 using System.Data;
 
-namespace PT.Infraestructure.Persistence.Common
+namespace PT.Infraestructure.Persistence.Abstractions
 {
-    public class BaseRepository
+    public abstract class RepositoryAbstract
     {
         protected readonly IDbTransaction _dbTransaction;
         protected readonly IDbConnection _dbConnection;
 
-        public BaseRepository(IDbTransaction dbTransaction)
+        protected RepositoryAbstract(IDbTransaction dbTransaction)
         {
             _dbTransaction = dbTransaction;
             _dbConnection = dbTransaction.Connection;

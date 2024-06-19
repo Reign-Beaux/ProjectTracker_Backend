@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using PT.Domain.ProjectTracker;
-using PT.Infraestructure.Persistence.Common;
+using PT.Infraestructure.Persistence.Abstractions;
 using PT.Infraestructure.Persistence.ProjectTracker.Users.Models;
 using System.Data;
 
 namespace PT.Infraestructure.Persistence.ProjectTracker.Users
 {
-    public class UsersRepository : BaseRepository, IUsersRepository
+    public class UsersRepository : RepositoryAbstract, IUsersRepository
     {
         public UsersRepository(IDbTransaction dbTransaction) : base(dbTransaction)
         {

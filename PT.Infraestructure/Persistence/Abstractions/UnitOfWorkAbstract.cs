@@ -1,14 +1,14 @@
-﻿using System.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
+using System.Data.SqlClient;
 
-namespace PT.Infraestructure.Persistence.Common
+namespace PT.Infraestructure.Persistence.Abstractions
 {
-    public abstract class BaseUnitOfWork : IDisposable
+    public abstract class UnitOfWorkAbstract
     {
         protected readonly IDbConnection _dbConnection;
         protected readonly IDbTransaction _dbTransaction;
 
-        protected BaseUnitOfWork(string connectionString)
+        protected UnitOfWorkAbstract(string connectionString)
         {
             _dbConnection = new SqlConnection(connectionString);
             _dbConnection.Open();
