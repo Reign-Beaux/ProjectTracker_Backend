@@ -46,7 +46,7 @@ namespace PT.Infraestructure.Persistence.Abstractions
             _dbConnection?.Dispose();
         }
 
-        ~BaseUnitOfWork()
+        ~UnitOfWorkAbstract()
         {
             Dispose(false);
         }
