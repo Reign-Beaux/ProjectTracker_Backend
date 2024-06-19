@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PT.Api.Abstractions;
 using PT.Application.Features.Auth.Commands.Login;
@@ -13,6 +14,7 @@ namespace PT.Api.Controllers
         {
         }
 
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginCommand request)
         {

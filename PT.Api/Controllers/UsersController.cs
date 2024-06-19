@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PT.Api.Abstractions;
 using PT.Application.Features.Users.Commands.UserDelete;
@@ -12,6 +13,7 @@ namespace PT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerAbstract
     {
         public UsersController(IMediator mediator) : base(mediator)

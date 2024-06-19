@@ -51,9 +51,8 @@ namespace PT.Application.Features.Auth.Commands.Login
                     response.NotFound(message);
                     return response;
                 }
-                var requestPassword = AesHelper.Decrypt(request.Password);
 
-                if (!BCryptHelper.MatchText(requestPassword, user.Password))
+                if (!BCryptHelper.MatchText(request.Password, user.Password))
                 {
                     response.NotFound(LoginCommandMesagges.INCORRECT_PASSWORD);
                     return response;

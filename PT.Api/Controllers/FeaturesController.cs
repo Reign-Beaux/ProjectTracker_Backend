@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PT.Api.Abstractions;
 using PT.Application.Features.Features.Commands.FeatureDelete;
@@ -11,6 +12,7 @@ namespace PT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FeaturesController : ControllerAbstract
     {
         public FeaturesController(IMediator mediator) : base(mediator)

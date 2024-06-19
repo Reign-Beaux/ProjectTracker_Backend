@@ -1,7 +1,9 @@
+using PT.Api.Configurations;
 using PT.Application.DependencyInjection;
 using PT.Infraestructure.DependencyInjection;
 
 var cors = "Cors";
+var corDev = "CorsDev";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSettingsInjection(builder.Configuration);
@@ -11,6 +13,7 @@ builder.Services.AddExternalServices(builder.Configuration);
 builder.Services.AddFeaturesServices(builder.Configuration);
 builder.Services.AddValidatorsServices();
 builder.Services.AddBehaviorsServices();
+builder.Services.AddJwtConfiguration(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -20,6 +23,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
+    options.AddPolicy(
+      name: corDev,
+      builder =>
+      {
+          builder.AllowAnyOrigin();
+          builder.AllowAnyMethod();
+          builder.AllowAnyHeader();
+      });
     options.AddPolicy(
       name: cors,
       builder =>
@@ -40,7 +51,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(cors);
+app.UseCors(app.Environment.IsDevelopment() ? corDev : cors);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
