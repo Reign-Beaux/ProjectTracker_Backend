@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using PT.Application.Features.Users.Helpers;
+using PT.Application.Helpers;
 using PT.Application.Models.Responses;
 using PT.Application.Services.Logger;
 using PT.Application.Static;
@@ -37,6 +38,7 @@ namespace PT.Application.Features.Users.Commands.UserUpdate
                     return response;
                 }
                 var parameters = _mapper.Map<UserUpdatePayload>(request);
+                parameters.Password = BCryptHelper.EncriptText(request.Password);
                 var fullname = $"{request.Name} {request.PaternalLastname} {request.MaternalLastname}";
                 parameters.Username = CreateUser.Handle(fullname);
 

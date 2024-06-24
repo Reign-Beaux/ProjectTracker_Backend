@@ -19,6 +19,21 @@ namespace PT.Api.Controllers
         public async Task<IActionResult> Login(LoginCommand request)
         {
             var response = await _mediator.Send(request);
+
+            if (response.Data.Token is not null)
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true, // No accesible via JavaScript
+                    Secure = true, // Solo enviar en conexiones HTTPS
+                    Expires = DateTime.UtcNow.AddDays(6), // Expiración de la cookie
+                    SameSite = SameSiteMode.None, // Política de SameSite
+                    Domain = "localhost",
+                };
+
+                HttpContext.Response.Cookies.Append("jwt", response.Data.Token, cookieOptions);
+            }
+
             return HandleResponse(response);
         }
     }

@@ -32,7 +32,7 @@ namespace PT.Application.Features.Users.Commands.UserInsert
             {
                 var tableName = EntityToTable.Convert<User>();
                 var parameters = _mapper.Map<UserInsertPayload>(request);
-                var fullname = $"{request.Name} {request.PaternalLastname} {request.MaternalLastname}" ;
+                var fullname = $"{request.Name} {request.PaternalLastname} {request.MaternalLastname}";
                 parameters.Password = BCryptHelper.EncriptText(request.Password);
                 parameters.Username = CreateUser.Handle(fullname);
                 await _projectTracker.UsersRepository.Insert(tableName, parameters);

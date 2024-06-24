@@ -23,6 +23,16 @@ namespace PT.Api.Configurations
                         ValidAudience = configuration["JwtSettings:Audience"]!,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!)),
                     };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            // Leer el token desde la cookie
+                            context.Token = context.Request.Cookies["jwt"];
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
         }
     }

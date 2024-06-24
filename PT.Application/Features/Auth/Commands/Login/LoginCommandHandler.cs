@@ -15,7 +15,7 @@ using System.Text;
 
 namespace PT.Application.Features.Auth.Commands.Login
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, IResponse>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, ResponseData<LoginCommandResponse>>
     {
         private readonly IUnitOfWorkProjectTracker _projectTracker;
         private readonly LogManagementService _logManagement;
@@ -31,7 +31,7 @@ namespace PT.Application.Features.Auth.Commands.Login
             _jwtSettings = jwtSettings.Value;
         }
 
-        public async Task<IResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseData<LoginCommandResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var response = new ResponseData<LoginCommandResponse>();
 
