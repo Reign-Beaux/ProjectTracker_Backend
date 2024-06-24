@@ -27,18 +27,20 @@ builder.Services.AddCors(options =>
       name: corDev,
       builder =>
       {
-          builder.AllowAnyOrigin();
+          builder.WithOrigins("http://localhost:5173");
           builder.AllowAnyMethod();
           builder.AllowAnyHeader();
+          builder.AllowCredentials();
       });
-    options.AddPolicy(
-      name: cors,
-      builder =>
-      {
-          builder.AllowAnyOrigin();
-          builder.AllowAnyMethod();
-          builder.AllowAnyHeader();
-      });
+    //options.AddPolicy(
+    //  name: cors,
+    //  builder =>
+    //  {
+    //      builder.WithOrigins("por definir");
+    //      builder.AllowAnyMethod();
+    //      builder.AllowAnyHeader();
+    //      builder.AllowCredentials();
+    //  });
 });
 
 var app = builder.Build();
