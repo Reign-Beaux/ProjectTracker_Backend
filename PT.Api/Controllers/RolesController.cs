@@ -6,6 +6,7 @@ using PT.Application.Features.Roles.Commands.RoleDelete;
 using PT.Application.Features.Roles.Commands.RoleInsert;
 using PT.Application.Features.Roles.Commands.RoleUpdate;
 using PT.Application.Features.Roles.Queries.RoleGetAll;
+using PT.Application.Features.Roles.Queries.RoleGetByFilters;
 using PT.Application.Features.Roles.Queries.RoleGetById;
 
 namespace PT.Api.Controllers
@@ -34,6 +35,15 @@ namespace PT.Api.Controllers
             var response = await _mediator.Send(request);
             return HandleResponse(response);
         }
+
+        [HttpPost("GetByFilters")]
+        public async Task<IActionResult> GetByFilters([FromBody] RoleGetByFiltersQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return HandleResponse(response);
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> Insert([FromBody] RoleInsertCommand request)
