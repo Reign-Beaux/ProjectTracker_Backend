@@ -23,7 +23,7 @@ namespace Application
 
         private static IServiceCollection AddSettings(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
+            services.Configure<JWTSettings>(configuration.GetSection(nameof(JWTSettings)));
 
             return services;
         }
