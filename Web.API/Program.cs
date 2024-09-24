@@ -1,10 +1,10 @@
 using Web.API;
 using Application;
+using Web.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services
     .AddAPI()
     .AddApplication();
@@ -21,6 +21,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
