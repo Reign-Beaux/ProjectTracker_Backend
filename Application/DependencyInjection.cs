@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Common.Behaviors;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
 {
@@ -10,6 +11,8 @@ namespace Application
             {
                 config.RegisterServicesFromAssemblyContaining<ApplicationAssemblyReference>();
             });
+
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             return services;
         }
