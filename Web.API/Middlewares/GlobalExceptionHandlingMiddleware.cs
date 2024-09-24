@@ -16,11 +16,11 @@ namespace Web.API.Middlewares
             catch (Exception e)
             {
                 _logger.LogError(e, e.Message);
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
                 ProblemDetails problem = new()
                 {
-                    Status = (int)HttpStatusCode.InternalServerError,
+                    Status = StatusCodes.Status500InternalServerError,
                     Type = "Server Error",
                     Title = "Server Error",
                     Detail = "An internal server has ocurred."
