@@ -11,7 +11,7 @@ namespace Web.API
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddTransient<GlobalExceptionHandlingMiddleware>();
-            services.AddJwtConfiguration(configuration);
+            services.AddJWTConfiguration(configuration);
 
             return services;
         }

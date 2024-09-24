@@ -7,7 +7,7 @@ namespace Web.API.Configurations
 {
     public static class JwtConfiguration
     {
-        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static void AddJWTConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
