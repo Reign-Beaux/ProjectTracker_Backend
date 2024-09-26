@@ -9,13 +9,8 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMediatR(config =>
-            {
-                config.RegisterServicesFromAssemblyContaining<ApplicationAssemblyReference>();
-            });
-
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
+            services.AddMediatRConfiguration(configuration);
             services.AddSettings(configuration);
 
             return services;
@@ -24,6 +19,16 @@ namespace Application
         private static IServiceCollection AddSettings(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JWTSettings>(configuration.GetSection(nameof(JWTSettings)));
+
+            return services;
+        }
+
+        private static IServiceCollection AddMediatRConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddMediatR(config =>
+            {
+                config.RegisterServicesFromAssemblyContaining<ApplicationAssemblyReference>();
+            });
 
             return services;
         }

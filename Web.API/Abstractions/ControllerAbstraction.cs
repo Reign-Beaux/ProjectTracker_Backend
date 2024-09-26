@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Web.API.Common;
+﻿using Application.Common.Consts;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Web.API.Abstractions
 {

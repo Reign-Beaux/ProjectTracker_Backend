@@ -1,4 +1,4 @@
-﻿namespace Web.API.Common
+﻿namespace Application.Common.Consts
 {
     public static class HttpContextItemKeys
     {
